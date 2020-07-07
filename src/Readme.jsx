@@ -1,14 +1,9 @@
 import React, { Fragment, useState, useEffect } from "react";
 import axios from "axios";
-import Readme from "./Readme";
 
 const ReactMarkdown = require("react-markdown");
 
-function ProjectPage({ match, location }) {
-  const {
-    params: { project },
-  } = match;
-
+function Readme({ project }) {
   const [data, setData] = useState();
 
   useEffect(() => {
@@ -23,17 +18,12 @@ function ProjectPage({ match, location }) {
       );
 
       setData(result.data);
-      console.log(result.data);
     };
 
     fetchData();
   }, []);
 
-  return (
-    <>
-      <Readme project={project}></Readme>
-    </>
-  );
+  return <>{data ? <ReactMarkdown source={data} /> : <p>No Readme</p>}</>;
 }
 
-export default ProjectPage;
+export default Readme;

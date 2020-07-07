@@ -34,6 +34,7 @@ const TitleBanner = styled.div`
 
 const Title = styled.h1`
   opacity: 1;
+  word-wrap: break-word;
 `;
 
 const CategoryBanner = styled.div`

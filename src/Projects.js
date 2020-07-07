@@ -16,12 +16,9 @@ function Projects(props) {
 
   useEffect(() => {
     const fetchData = async () => {
-      const result = await axios(
-        "https://api.github.com/users/TijsDeBelie/repos"
-      );
-
-      setData(result.data);
+      const result = await axios("http://localhost:5000/projects");
       console.log(result.data);
+      setData(result.data);
     };
 
     fetchData();
