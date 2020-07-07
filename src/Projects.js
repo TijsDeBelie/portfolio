@@ -1,7 +1,8 @@
-import React from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import Thumbnail from "./Thumbnail.js"; // Import the Thumbnail component
 import "./App.css";
 import styled from "styled-components";
+import axios from "axios";
 
 const ProjectList = styled.div`
   display: flex;
@@ -11,29 +12,33 @@ const ProjectList = styled.div`
 `;
 
 function Projects(props) {
+  const [data, setData] = useState();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await axios(
+        "https://api.github.com/users/TijsDeBelie/repos"
+      );
+
+      setData(result.data);
+      console.log(result.data);
+    };
+
+    fetchData();
+  }, []);
   return (
     // Render a Thumbnail component
     <>
       <h1>Projects</h1>
       <ProjectList>
-        <Thumbnail
-          link="/twitter"
-          image="logo192.png"
-          title="TwitterBot"
-          category="Bot"
-        />
-        <Thumbnail
-          link="/parrot"
-          image="logo192.png"
-          title="ParrotBot"
-          category="Bot"
-        />
-        <Thumbnail
-          link="/sentinel"
-          image="logo192.png"
-          title="SentinelBot"
-          category="Bot"
-        />
+        {data?.map((item) => (
+          <Thumbnail
+            key={item.name}
+            link={`/projects/${item.name}`}
+            image="logo192.png"
+            title={item.name}
+          />
+        ))}
       </ProjectList>
     </>
   );

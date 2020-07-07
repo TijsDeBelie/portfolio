@@ -8,6 +8,7 @@ import Projects from "./Projects.js";
 import Articles from "./Articles.js";
 import Navbar from "./Navbar.js";
 import About from "./About.js";
+import ProjectPage from "./ProjectPage.js";
 import "./App.css";
 
 function App() {
@@ -16,11 +17,14 @@ function App() {
       <Navbar></Navbar>
       <div className="App">
         <Route exact path="/" component={Projects} />
-        <Route path="/articles" component={Articles} />
-        <Route path="/about" component={About} />
+        <Route exact path="/articles" component={Articles} />
+        <Route exact path="/about" component={About} />
+        <Route exact path="/projects/:project" component={ProjectPage} />
       </div>
     </BrowserRouter>
   );
 }
+
+
 
 export default App;
